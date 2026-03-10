@@ -1,0 +1,16 @@
+# Entorno Virtual
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Datos Sensibles (Privacidad del Negocio)
+config/settings.json
+data/*.csv
+data/facturas_pdf/
+data/test_factura.pdf
+ticket_temp.txt
+
+# OS
+.DS_Store
+Thumbs.db
