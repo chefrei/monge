@@ -2,6 +2,8 @@
 
 Sistema de Punto de Venta (POS) optimizado para "Cachapeate - Las Cachapas de Aroa", diseñado para una gestión rápida, eficiente y profesional.
 
+![Demostración en Vivo](static/images/pos_demo.webp)
+
 ## 🌟 Características Principales
 
 -   **Multi-moneda (USD/VES)**: Manejo dual de bolívares y dólares con tasa de cambio configurable en tiempo real.
