@@ -14,3 +14,8 @@ ticket_temp.txt
 # OS
 .DS_Store
 Thumbs.db
+
+# Temporales de Prueba
+test*.*
+*.pdf
+!data/facturas_pdf/

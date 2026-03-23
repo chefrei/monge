@@ -35,14 +35,3 @@ DEFAULT_CATEGORIAS = {
         "Frappé": 3.0
     }
 }
-
-# --- Estética UI ---
-BG_COLOR = "#f0f0f0"
-WHITE = "white"
-ACCENT_BLUE = "#e3f2fd"
-SUCCESS_GREEN = "#4caf50"
-WARNING_ORANGE = "#ff9800"
-DANGER_RED = "#f44336"
-INFO_PURPLE = "#9c27b0"
-ADMIN_BLUE = "#2196f3"
-TICKET_YELLOW = "#fff9c4"

@@ -12,19 +12,37 @@ Sistema de Punto de Venta (POS) optimizado para "Cachapeate - Las Cachapas de Ar
 -   **Reportes y Cierres**: Consultas detalladas por fecha y reporte de cierre de caja optimizado.
 -   **Multi-Plataforma**: Soporte para impresión directa tanto en Windows como en Linux (CUPS/lp).
 
-## 🛠️ Instalación y Uso
+## 🛠️ Instalación y Uso (Versión Web)
 
-### En Windows 🪟
-1.  **Doble Clic** en `ejecutar_pos.bat`. El sistema creará el entorno virtual e instalará las dependencias (`Pillow`, `fpdf2`) automáticamente.
-2.  **Acceso Directo**: Se recomienda crear un acceso directo de `ejecutar_pos.bat` en el escritorio para mayor comodidad.
-
-### En Linux 🐧
-1.  **Dependencias**:
+1.  **Instalar Dependencias**:
+    Abre tu terminal en esta carpeta y ejecuta:
     ```bash
     pip install -r requirements.txt
     ```
-    *(Nota: Asegúrate de tener `python3-tk` instalado).*
-2.  **Impresión**: Configura tu impresora en el sistema como "Predeterminada" para habilitar la impresión de tickets vía `lp`.
+2.  **Iniciar Servidor Web**:
+    Ejecuta el servidor Flask con el siguiente comando:
+    ```bash
+    python app.py
+    ```
+3.  **Acceso a la Aplicación**:
+    Ingresa desde cualquier navegador web en el mismo equipo a:
+    `http://127.0.0.1:5000`
+
+## 📸 Gestión de Imágenes de Productos
+
+La plataforma permite conectar visualmente cada producto con una fotografía de forma automática:
+
+- **Subida Directa**: Desde el panel de **ADMINISTRACIÓN**, utiliza el botón de **Seleccionar Archivo** al crear o editar un producto.
+- **Automatización**: El sistema guarda la imagen en `static/images/products/` y la vincula al producto sin necesidad de renombrado manual.
+- **Visualización Inmediata**: Las imágenes aparecerán en la grilla principal de ventas al instante.
+
+## ⚙️ Administración Web
+Desde la pestaña **ADMINISTRACIÓN** dentro de la web puedes:
+- Realizar el cierre de caja (con protección de sobreescritura).
+- Actualizar la tasa del dólar en tiempo real.
+- **Gestionar Inventario**: Añadir, editar o **eliminar** productos con sugerencias inteligentes.
+- **Eliminar Ventas**: Posibilidad de anular tickets del día (solo antes del cierre).
+- **Configurar Email**: Acceso directo para configurar tus credenciales SMTP.
 
 ## 📧 Configuración de Correo Electrónico
 
