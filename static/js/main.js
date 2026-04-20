@@ -576,6 +576,47 @@ async function saveEmailConfig() {
     }
 }
 
+async function testEmailConfig() {
+    const server = document.getElementById('smtpServer').value.trim();
+    const port = document.getElementById('smtpPort').value.trim();
+    const user = document.getElementById('smtpUser').value.trim();
+    const pass = document.getElementById('smtpPass').value.trim();
+    
+    if (!server || !user || !pass) {
+        await customDialog({message: "Por favor, completa los campos de Servidor, Usuario y Contraseña para probar."});
+        return;
+    }
+
+    const testBtn = event.target;
+    const originalText = testBtn.innerText;
+    testBtn.innerText = "PROBANDO...";
+    testBtn.disabled = true;
+
+    try {
+        const res = await fetch('/api/admin/test_email', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                smtp_server: server,
+                smtp_port: parseInt(port) || 587,
+                smtp_user: user,
+                smtp_password: pass
+            })
+        });
+        const data = await res.json();
+        if (data.success) {
+            await customDialog({title: "Éxito", message: data.message});
+        } else {
+            await customDialog({title: "Error de Prueba", message: data.message || data.error});
+        }
+    } catch (e) {
+        await customDialog({message: "Error al conectar con el servidor para la prueba."});
+    } finally {
+        testBtn.innerText = originalText;
+        testBtn.disabled = false;
+    }
+}
+
 // ---- CUSTOM DIALOG SYSTEM ----
 function customDialog({ title = "Aviso", message = "", type = "alert", defaultValue = "" }) {
     return new Promise((resolve) => {

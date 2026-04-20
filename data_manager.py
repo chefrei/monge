@@ -670,3 +670,36 @@ def enviar_email_ticket(destinatario, pdf_path, factura_num, config, html_body=N
         if "name resolution" in err_str.lower():
             return False, "Error de DNS: No se pudo encontrar el servidor smtp.gmail.com.\nVerifique su conexión a internet o DNS."
         return False, err_str
+
+def probar_email_config(config):
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+
+    server = config.get("smtp_server")
+    port = config.get("smtp_port", 587)
+    user = config.get("smtp_user")
+    pwd = config.get("smtp_password")
+
+    if not all([server, user, pwd]):
+        return False, "Configuración incompleta."
+
+    try:
+        msg = MIMEMultipart()
+        msg['From'] = user
+        msg['To'] = user # Test to self
+        msg['Subject'] = "Prueba de Configuración POS Cachapéate"
+        
+        cuerpo = "Si estás leyendo esto, la configuración de correo de tu POS funciona correctamente."
+        msg.attach(MIMEText(cuerpo, 'plain'))
+
+        with smtplib.SMTP(server, port, timeout=10) as server_conn:
+            server_conn.starttls()
+            server_conn.login(user, pwd)
+            server_conn.send_message(msg)
+        
+        return True, "¡Conexión exitosa! El correo de prueba fue enviado a " + user
+    except smtplib.SMTPAuthenticationError:
+        return False, "Error de autenticación. Verifique su Correo y Contraseña de Aplicación (App Password)."
+    except Exception as e:
+        return False, str(e)

@@ -247,6 +247,22 @@ def email_config():
         except Exception as e:
             return jsonify({"success": False, "error": str(e)}), 500
 
+@app.route('/api/admin/test_email', methods=['POST'])
+def test_email():
+    try:
+        data = request.json
+        config = {
+            "smtp_server": data.get("smtp_server"),
+            "smtp_port": int(data.get("smtp_port", 587)),
+            "smtp_user": data.get("smtp_user"),
+            "smtp_password": data.get("smtp_password")
+        }
+        
+        exito, msg = data_manager.probar_email_config(config)
+        return jsonify({"success": exito, "message": msg})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
 @app.route('/api/admin/product', methods=['DELETE'])
 def delete_product():
     try:
